@@ -1,79 +1,96 @@
 const readFile = require("../utils/readFile.js");
 const writeFile = require("../utils/writeFile.js");
+const db = require("../database/db.js");
 
 
-async function updatePaymentStatus(rl, callback) {
+async function updatePaymentStatus(callback) {
 
+    // Reading data from JSON files
     const farmerNumbers = await readFile("farmerNumbers");
     const paymentStatuses = await readFile("paymentStatus");
+    const payments = await readFile("payments");
 
 
-    rl.question("\nEnter Farmer Number: ", async (farmerNumber) => {
-
-        let found = false;
+    let updated = false;
 
 
-        for (let i = 0; i < farmerNumbers.length; i++) {
+    // Checking every farmer payment
+    for (let i = 0; i < payments.length; i++) {
 
 
-            if (Number(farmerNumber) === farmerNumbers[i]) {
+        // If payment is below 10000 and still pending
+        if (
+            payments[i] < 10000 &&
+            paymentStatuses[i].toLowerCase() === "pending"
+        ) {
 
 
-                rl.question(
-                    "Enter New Payment Status (Paid/Pending): ",
-                    async (status) => {
+            // Update local array
+            paymentStatuses[i] = "Paid";
+
+            updated = true;
 
 
-                        const newStatus = status.trim();
+            // SQL update statement
+            const sql = `
+                UPDATE producedeliveries
+                SET paymentStatus = 'Paid'
+                WHERE farmerNumber = ?;
+            `;
 
 
-                        if (
-                            newStatus.toLowerCase() !== "paid" &&
-                            newStatus.toLowerCase() !== "pending"
-                        ) {
+            // Update database
+            db.query(
+                sql,
+                [farmerNumbers[i]],
+                (err, result) => {
 
-                            console.log("❌ Invalid Payment Status");
-                            callback();
-                            return;
-                        }
-
-
-                        paymentStatuses[i] = newStatus;
-
-
-                        await writeFile(
-                            paymentStatuses,
-                            "paymentStatus"
+                    if (err) {
+                        console.error(
+                            "❌ Database Update Error:",
+                            err
                         );
-
-
-                        console.log(
-                            `✅ Payment Status Updated For Farmer ${farmerNumber}`
-                        );
-
-
-                        found = true;
-
-                        callback();
-
+                        return;
                     }
-                );
 
 
-                return;
-            }
+                    console.log(
+                        `✅ Farmer ${farmerNumbers[i]} payment status updated`
+                    );
 
-        }
-
-
-        if (!found) {
-
-            console.log("❌ Farmer Not Found");
-            callback();
+                }
+            );
 
         }
 
-    });
+    }
+
+
+    // If no farmer matched the condition
+    if (!updated) {
+
+        console.log(
+            "\nℹ️  No pending payments below KES 10,000 were found.\n"
+        );
+
+    } 
+    else {
+
+        // Save updated statuses to JSON file
+        await writeFile(
+            paymentStatuses,
+            "paymentStatus"
+        );
+
+
+        console.log(
+            "\n✅ Payment statuses updated successfully.\n"
+        );
+
+    }
+
+
+    callback();
 
 }
 
