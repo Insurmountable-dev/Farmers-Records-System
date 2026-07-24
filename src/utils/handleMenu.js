@@ -2,7 +2,7 @@ const callback = require("./callback.js");
 
 // Importing Services
 const displayFarmers = require("../services/display.js");
-const calculatePayments = require("../services/calculatePayments.js");
+const showPaymentMenu = require("../utils/showPaymentMenu.js");
 const searchFarmer = require("../services/searchFarmer.js");
 const displayPendingPayments = require("../services/displayPendingPayments.js");
 const updatePaymentStatus = require("../services/updatePaymentStatus.js");
@@ -26,7 +26,7 @@ async function handleMenu(choice, rl, showMenu) {
 
 
         case 3:
-            calculatePayments(() => callback(rl, showMenu));
+            showPaymentMenu();
             break;
 
 
