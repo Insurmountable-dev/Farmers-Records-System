@@ -1,0 +1,26 @@
+{
+  "name": "farmers-record-system",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000F\u0000a\u0000r\u0000m\u0000e\u0000r\u0000s\u0000-\u0000R\u0000e\u0000c\u0000o\u0000r\u0000d\u0000s\u0000-\u0000S\u0000y\u0000s\u0000t\u0000e\u0000m\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Insurmountable-dev/Farmers-Records-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Insurmountable-dev/Farmers-Records-System/issues"
+  },
+  "homepage": "https://github.com/Insurmountable-dev/Farmers-Records-System#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "mysql2": "^3.23.1",
+    "nodemon": "^3.1.14"
+  }
+}
