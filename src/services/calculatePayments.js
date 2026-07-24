@@ -1,14 +1,12 @@
 const sleep    = require("../utils/Sleep.js");
 const readFile = require("../utils/readFile.js");
+const payments =  require("../farmerData/data/payments.js");
 
-async function calculatePayments(callback) {
+async function calculatePayments(callback, truth) {
 
     const farmerNames = await readFile("farmerNames");
     const quantities = await readFile("quantities");
     const prices = await readFile("prices");
-
-    // Array to store calculated payments
-    const payments = [];
 
     for (let i = 0; i < farmerNames.length; i++) {
 
@@ -16,19 +14,21 @@ async function calculatePayments(callback) {
         const payment = quantities[i] * prices[i];
 
         // Store payment in array
-        payments[i] = payment;
+        payments[i]    = payment;
 
-        // Display farmer payment
-        console.log("==================================");
-        console.log(`Farmer Name : ${farmerNames[i]}`);
-        console.log(`Payment     : KSh ${payments[i]}`);
-        console.log("==================================\n");
+        if(truth) {
+            // Display farmer payment
+            console.log("==================================");
+            console.log(`Farmer Name : ${farmerNames[i]}`);
+            console.log(`Payment     : KSh ${payments[i]}`);
+            console.log("==================================\n");
+        };
 
-        sleep(900);
+       await  sleep(900);
     }
 
     callback();
-    return payments;
+
 }
 
 module.exports = calculatePayments;
