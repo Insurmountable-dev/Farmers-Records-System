@@ -1,1 +1,6 @@
-console.log("\nHello There.... And welcome\n")
+const fetchData = require("./src/farmerData/fetchData.js");
+
+
+
+// Fetching Farm Data 
+fetchData();
