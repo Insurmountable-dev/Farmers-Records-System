@@ -3,7 +3,7 @@ const calculateTotalPayments = require("../services/calculateTotalPayments.js");
 const callback = require("./callback.js");
 
 async function handlePaymentMenu(rl, choice, showPaymentMenu) {
-  const showMenu = require("../utils/showMenu.js");
+  const{ showMenu} = require("../utils/showMenu.js");
 
   switch (Number(choice)) {
     case 1:

@@ -20,6 +20,7 @@ const saveRecords = require("../services/saveRecords.js");
 
 async function handleMenu(choice, rl, showMenu) {
 
+
     switch (Number(choice)) {
 
         // Display all farmer deliveries
@@ -84,7 +85,7 @@ async function handleMenu(choice, rl, showMenu) {
 
         // Remove invalid records
         case 13:
-            removeInvalidRecords(() => callback(rl, showMenu));
+            removeInvalidRecords(rl,() => callback(rl, showMenu));
             break;
 
         // Save updated records to the database

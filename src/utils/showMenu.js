@@ -9,8 +9,8 @@ const rl = readline.createInterface({
 
 function showMenu() {
 
-    // Uncomment the next line if you want to clear the terminal
-    // console.clear();
+    console.clear();
+    console.log("showMenu called");
 
     console.log("==================================================");
     console.log("        NYERI GREEN FARMERS COOPERATIVE");
@@ -38,4 +38,4 @@ function showMenu() {
     });
 }
 
-module.exports = showMenu;
+module.exports = {showMenu,rl};

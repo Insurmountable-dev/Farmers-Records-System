@@ -1,10 +1,7 @@
-const readline = require("readline");
+const {rl} =  require("./showMenu");
 const handlePaymentMenu = require("./handlePaymentMenu");
 
-const rl = readline.createInterface({
-    input:process.stdin,
-    output:process.stdout
-});
+
 
 
 function showPaymentMenu () {
