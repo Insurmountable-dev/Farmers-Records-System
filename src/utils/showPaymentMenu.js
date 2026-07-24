@@ -1,10 +1,10 @@
-const {rl} =  require("./showMenu");
 const handlePaymentMenu = require("./handlePaymentMenu");
 
 
 
 
 function showPaymentMenu () {
+const {rl} =  require("./showMenu");
 
         
     console.log("\n💰 FARMER PAYMENT MENU 💰");
