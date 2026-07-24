@@ -1,0 +1,6 @@
+{
+  "ignore": [
+    "src/farmerData/data/*.json",
+    "node_modules/*"
+  ]
+}
