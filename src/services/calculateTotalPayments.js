@@ -1,9 +1,10 @@
 const calculatePayments = require("./calculatePayments");
-const payments =  require("../farmerData/data/payments.js");
+const readFile = require("../utils/readFile.js");
 
 
 async function calculateTotalPayments(callback) {
 
+    const payments = await readFile("payments");
 
     console.log("\nCalculating Payments...🔃\n🔃 This May Take A While.......");
     await calculatePayments(() =>{}, false);

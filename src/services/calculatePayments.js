@@ -1,12 +1,12 @@
 const sleep    = require("../utils/Sleep.js");
 const readFile = require("../utils/readFile.js");
-const payments =  require("../farmerData/data/payments.js");
 
 async function calculatePayments(callback, truth) {
 
     const farmerNames = await readFile("farmerNames");
     const quantities = await readFile("quantities");
     const prices = await readFile("prices");
+    const payments = await readFile("payments");
 
     for (let i = 0; i < farmerNames.length; i++) {
 
