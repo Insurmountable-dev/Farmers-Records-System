@@ -14,13 +14,13 @@ async function displayFarmers(callback) {
     for (let i = 0; i < farmerNumbers.length; i++) {
 
         console.log("==========================================");
+        console.log(`========== ${farmerNames[i]} ==========`);
         console.log(`Farmer Number     : ${farmerNumbers[i]}`);
         console.log(`Farmer Name       : ${farmerNames[i]}`);
         console.log(`Produce Type      : ${produceTypes[i]}`);
         console.log(`Quantity Delivered: ${quantities[i]}`);
         console.log(`Price Per Unit    : KSh ${prices[i]}`);
-        console.log(`Payment Status    : ${paymentStatuses[i]}`);
-        console.log("==========================================");
+        console.log(`Payment Status    : ${paymentStatuses[i]}\n`);
 
         await sleep(900);
     }
