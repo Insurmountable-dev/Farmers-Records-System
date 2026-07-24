@@ -1,56 +1,70 @@
-const readline = require("readline");
 const callback = require("./callback.js");
 
-
-// Importing Services..
+// Importing Services
 const displayFarmers = require("../services/display.js");
+const calculatePayments = require("../services/calculatePayments.js");
+const searchFarmer = require("../services/searchFarmer.js");
+const displayPendingPayments = require("../services/displayPendingPayments.js");
+const updatePaymentStatus = require("../services/updatePaymentStatus.js");
+const displayLargeDeliveries = require("../services/displayLargeDeliveries.js");
+const generateReport = require("../services/generateReport.js");
+const saveRecords = require("../services/saveRecords.js");
 
 
-function handleMenu(choice,rl,showMenu) {
-
-
-    // Deciding what to do based on user choice
+async function handleMenu(choice, rl, showMenu) {
 
     switch (Number(choice)) {
-           case 1:
-                displayFarmers(()=>callback(rl,showMenu));
-           break;
+
+        case 1:
+            displayFarmers(() => callback(rl, showMenu));
+            break;
+
 
         case 2:
-            console.log("Searching For A Farmer");
+            searchFarmer(rl,() => callback(rl, showMenu));
             break;
+
 
         case 3:
-            console.log("Adding A New Farmer");
+            calculatePayments(() => callback(rl, showMenu));
             break;
+
 
         case 4:
-            console.log("Updating Farmer Information");
+            displayPendingPayments(() => callback(rl, showMenu));
             break;
+
 
         case 5:
-            console.log("Deleting A Farmer");
+            updatePaymentStatus(rl,() => callback(rl, showMenu));
             break;
+
 
         case 6:
-            console.log("Recording Produce Delivery");
+            displayLargeDeliveries(() => callback(rl, showMenu));
             break;
+
 
         case 7:
-            console.log("Displaying All Produce Deliveries");
+            generateReport(() => callback(rl, showMenu));
             break;
+
 
         case 8:
-            console.log("Generating Daily Report");
+            saveRecords(() => callback(rl, showMenu));
             break;
+
 
         case 9:
-            console.log("Exiting The System");
+            console.log("Exiting The System...");
+            rl.close();
             process.exit(0);
-
             break;
+
+
         default:
             console.log("❌ Invalid Choice. Please Select A Valid Option.");
+            callback(rl, showMenu);
     }
 }
 
