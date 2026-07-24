@@ -27,6 +27,7 @@ db.connect((err) => {
         return;
     }
 
+    console.clear();
     console.log("\n✅ Database Is Connected As Successfully\n");
 })
 

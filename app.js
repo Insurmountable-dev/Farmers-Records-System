@@ -1,9 +1,14 @@
-const showMenu = require("./src/utils/showMenu.js")
+require("dotenv").config();
 
-//Display The Menu At First
-showMenu();
+const fetchData = require("./src/farmerData/fetchData.js");
+const {showMenu} = require("./src/utils/showMenu");
 
+async function start() {
 
+    await fetchData();
 
+    showMenu();
 
+}
 
+start();

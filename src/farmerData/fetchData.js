@@ -21,34 +21,41 @@ function queryDatabase(query) {
 
 }
 
+async function fetchData(callback) {
 
-async function fetchData() {
+    try {
 
+        console.log("\nDownloading latest farmer records...\n");
 
-    for (const [index, statement] of sql.entries()) {
+        for (const statement of sql) {
 
+            const results = await queryDatabase(statement.query);
 
-        const results = await queryDatabase(statement.query);
+            const farmerData = [];
 
+            for (const row of results) {
 
-        const farmerData = [];
+                const key = Object.keys(row)[0];
+                farmerData.push(row[key]);
 
+            }
 
-        for (let i = 0; i < results.length; i++) {
-
-            const object = results[i];
-
-            const key = Object.keys(object)[0];
-
-            farmerData.push(object[key]);
+            await writeFile(farmerData, statement.name);
 
         }
+        console.log("✓ Farmer records downloaded successfully.\n");
 
+        if (callback) {
+            callback();
+        }
 
-        await writeFile(farmerData, statement.name);}
+    } catch (err) {
 
+        console.error("❌ Failed to download farmer records.");
+        console.error(err);
+
+    }
 
 }
-
 
 module.exports = fetchData;
