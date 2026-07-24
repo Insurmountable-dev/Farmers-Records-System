@@ -7,6 +7,9 @@ node_modules/
 # Logs
 *.log
 
+# Farmer data files (updated frequently)
+src/farmerData/data/*.json
+
 # Build files
 dist/
 build/
